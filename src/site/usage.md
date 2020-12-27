@@ -1,33 +1,31 @@
 ---
-title: Get Yours
+title: Usage
 layout: layouts/base.njk
-subtitle: Clone and deploy your own EleventyOne starter template.
+subtitle: Get started with CopyPasta
 ---
+### Set system permissions
 
-## Hosting
+The app needs a few system permissions for all the features to work. The first permissions we need are for the `active-win` package, which is used to capture metadata on the focused window when the hotkey is pressed.
 
-This site is deployed by, and hosted by [Netlify](https://www.netlify.com).
+On macOS, navigate to:
+```bash
+System Preferences › Security & Privacy › Privacy › Screen Recording
+```
 
-<div class="nakedLink">
+You'll need to give permission to whatever app is running `npm start` - most likely your terminal. If you're using VSCode's integrated terminal to run `npm start`, then give "VSCode" permission.
 
-Latest deploy status: [![Netlify Status](https://api.netlify.com/api/v1/badges/056b4a67-70e6-4af4-9be5-dee151b8e906/deploy-status)](https://app.netlify.com/sites/eleventyone/deploys)
+Do the same for "Accessibility"
 
-</div>
+```bash
+System Preferences › Security & Privacy › Privacy › Accessibility
+```
 
-## One-click deploy
+### Capturing a snippet
 
-To get your own instance of this [Eleventy](https://11ty.io) starter project cloned and deploying to [Netlify](https://www.netlify.com) very quickly, just click the button below and follow the instructions.
+Use the hotkey `Ctrl X` to capture a text snippet from anywhere on your machine. Snippet will save metadata on the time, location, page title, and url of window where the snippet was taken. To see this metadata, click the `Info` icon button on the top right of the app.
 
-<div class="nakedLink">
+### Searching
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/philhawksworth/eleventyone)
+To search on more than snippet text, you can use the `tag`, `lang`, `origin`, `originUrl` or `originTitle` shortcuts. In the searchbar, type `lang:javascript` and hit enter, this will create a search token. You can add as many search tokens as you want and search text at the same time.
 
-</div>
-
-## 👆 Wait, what happens when I click that button?
-
-Good question. Here's what it will do...
-
-1. Netlify will clone the [git repository]({{pkg.repository.url}}) of this project into your GitHub account. You will be asked for the required permissions to add the repo for you.
-2. They'll create a new site for you in Netlify, and configure it to use your shiny new repo. Right away you'll be able to deploy changes simply by pushing changes to your repo.
-3. That's it really.
+You can also click tokens in the snippet metadata panel which will initiate a search.

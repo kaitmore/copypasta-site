@@ -141,7 +141,7 @@ a:focus {
 code {
   font-size: 0.8em;
   background-color: mix($text-color, $accent-color, 80%);
-  color: rgb(42, 65, 77);
+  color: #fff !important;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 6px;

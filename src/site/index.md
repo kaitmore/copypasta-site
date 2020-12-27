@@ -1,7 +1,7 @@
 ---
 title: CopyPasta
 subtitle: A code snippet indexer for developers.
-layout: layouts/base.njk
+layout: layouts/home.njk
 ---
 ## Features
 
