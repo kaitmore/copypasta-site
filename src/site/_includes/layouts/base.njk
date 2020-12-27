@@ -10,7 +10,10 @@
 
     <div class="container">
       {% include "header.njk" %}
-      {{ content | safe }}
+      <div class="content">
+        {{ content | safe }}
+      </div>
+      <img src="./images/screenshot.png" />
       {% include "footer.njk" %}
     </div>
 
