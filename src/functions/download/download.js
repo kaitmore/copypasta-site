@@ -43,7 +43,7 @@ exports.handler = async function (event, context) {
   console.log(asset);
   return {
     statusCode: 200,
-    body: `Download`
+    body: asset
   };
 
   // let asset_id;
