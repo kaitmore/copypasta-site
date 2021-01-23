@@ -10,15 +10,7 @@ const config = {
 exports.handler = async function (event, context) {
   const { owner, repo, token } = config;
   const github = new Octokit({ auth: token });
-  github.repos.getReleaseAsset.endpoint.merge({
-    headers: {
-      Accept: "application/octet-stream"
-    },
-    owner,
-    repo,
-    asset_id: asset.id,
-    access_token: process.env.GH_TOKEN
-  });
+
   const { data: releases } = await github.repos.listReleases({
     owner,
     repo
@@ -34,7 +26,15 @@ exports.handler = async function (event, context) {
   }
 
   // let download_url = asset.browser_download_url;
-
+  github.repos.getReleaseAsset.endpoint.merge({
+    headers: {
+      Accept: "application/octet-stream"
+    },
+    owner,
+    repo,
+    asset_id: asset.id,
+    access_token: process.env.GH_TOKEN
+  });
   const asset = await github.repos.getReleaseAsset({
     owner,
     repo,
