@@ -9,7 +9,6 @@ const options = {
 
 exports.handler = async function (event, context) {
   const { owner, repo, token } = options;
-  console.log("TOKEN", token);
   const github = new Octokit({ auth: token });
   const { data: releases } = await github.repos.listReleases({
     owner,
@@ -17,9 +16,16 @@ exports.handler = async function (event, context) {
   });
   const latestRelease = releases.shift();
 
+  let asset;
+  try {
+    asset = latestRelease.assets.find((a) => a.name.endsWith(".dmg"));
+  } catch (e) {
+    console.error("Could not find the latest release asset");
+    process.exit(1);
+  }
   return {
     statusCode: 200,
-    body: `Download ${latestRelease.browser_download_url}`
+    body: `Download ${asset.browser_download_url}`
   };
 
   // let asset_id;
