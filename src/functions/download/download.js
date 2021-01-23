@@ -18,34 +18,44 @@ exports.handler = async function (event, context) {
   });
   const latestRelease = releases.shift();
 
-  let asset_id;
+  let asset;
   try {
-    asset_id = latestRelease.assets.find((a) => a.name.endsWith(".dmg")).id;
+    asset = latestRelease.assets.find((a) => a.name.endsWith(".dmg"));
   } catch (e) {
     console.error("Could not find the latest release asset");
     process.exit(1);
   }
 
   // let download_url = asset.browser_download_url;
-
-  const asset = await github.repos.getReleaseAsset({
+  octokit.repos.getReleaseAsset.endpoint.merge({
+    headers: {
+      Accept: "application/octet-stream"
+    },
     owner,
     repo,
-    asset_id,
+    asset_id: asset.id,
+    access_token: token
+  });
+  const file = fs.createWriteStream("copypasta-1.0.4.dmg");
+  const buffer = await github.repos.getReleaseAsset({
+    owner,
+    repo,
+    asset_id: asset.id,
     headers: {
-      Accept: "application/octet-stream",
-      authorization: `token ${token}`
+      Accept: "application/octet-stream"
     }
   });
+  file.write(buffer);
+  file.end();
   fs.readdir(".", (err, files) => {
     files.forEach((file) => {
       console.log(file);
     });
   });
-  console.log(asset);
+
   return {
     statusCode: 200,
-    body: asset
+    body: buffer
   };
 
   // let asset_id;
