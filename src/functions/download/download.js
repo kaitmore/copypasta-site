@@ -6,19 +6,19 @@ const config = {
   repo: process.env.GH_REPO || "copypasta",
   token: process.env.GH_TOKEN
 };
-octokit.repos.getReleaseAsset.endpoint.merge({
-  headers: {
-    Accept: "application/octet-stream"
-  },
-  owner,
-  repo,
-  asset_id: asset.id,
-  access_token: process.env.GH_TOKEN
-});
 
 exports.handler = async function (event, context) {
   const { owner, repo, token } = config;
   const github = new Octokit({ auth: token });
+  octokit.repos.getReleaseAsset.endpoint.merge({
+    headers: {
+      Accept: "application/octet-stream"
+    },
+    owner,
+    repo,
+    asset_id: asset.id,
+    access_token: process.env.GH_TOKEN
+  });
   const { data: releases } = await github.repos.listReleases({
     owner,
     repo
