@@ -26,15 +26,15 @@ exports.handler = async function (event, context) {
     process.exit(1);
   }
 
-  github.repos.getReleaseAsset.endpoint.merge({
-    headers: {
-      Accept: "application/octet-stream"
-    },
-    owner,
-    repo,
-    asset_id: asset.id,
-    access_token: token
-  });
+  // github.repos.getReleaseAsset.endpoint.merge({
+  //   headers: {
+  //     Accept: "application/octet-stream"
+  //   },
+  //   owner,
+  //   repo,
+  //   asset_id: asset.id
+  //   // access_token: token
+  // });
   const file = fs.createWriteStream("/tmp/copypasta-1.0.4.dmg");
   const buffer = await github.repos.getReleaseAsset({
     owner,
