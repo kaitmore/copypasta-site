@@ -24,7 +24,7 @@ exports.handler = async function (event, context) {
     process.exit(1);
   }
 
-  let download_url = asset.browser_download_url;
+  // let download_url = asset.browser_download_url;
 
   const asset = await github.repos.getReleaseAsset({
     owner,
