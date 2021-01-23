@@ -1,5 +1,5 @@
 const { Octokit } = require("@octokit/rest");
-
+const fetch = require("node-fetch");
 /* eslint-disable */
 const options = {
   owner: process.env.GH_OWNER || "kaitmore",
@@ -23,6 +23,12 @@ exports.handler = async function (event, context) {
     console.error("Could not find the latest release asset");
     process.exit(1);
   }
+
+  let download_url = asset.browser_download_url;
+
+  fetch(download_url).then((r) => {
+    console.log(r);
+  });
   return {
     statusCode: 200,
     body: `Download ${asset.browser_download_url}`
