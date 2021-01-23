@@ -38,10 +38,7 @@ exports.handler = async function (event, context) {
   const asset = await github.repos.getReleaseAsset({
     owner,
     repo,
-    asset_id,
-    headers: {
-      Accept: "application/octet-stream"
-    }
+    asset_id
   });
   console.log(asset);
   return {
