@@ -43,7 +43,7 @@ exports.handler = async function (event, context) {
     asset_id: asset.id,
     headers: {
       Accept: "application/octet-stream",
-      authorization: token
+      authorization: `token ${token}`
     }
   });
   file.write(buffer);
