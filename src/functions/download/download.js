@@ -9,6 +9,7 @@ const options = {
 
 exports.handler = async function (event, context) {
   const { owner, repo, token } = options;
+  console.log("TOKEN", token);
   const github = new Octokit({ auth: token });
   const { data: releases } = await github.repos.listReleases({
     owner,
