@@ -10,7 +10,7 @@ const config = {
 exports.handler = async function (event, context) {
   const { owner, repo, token } = config;
   const github = new Octokit({ auth: token });
-  octokit.repos.getReleaseAsset.endpoint.merge({
+  github.repos.getReleaseAsset.endpoint.merge({
     headers: {
       Accept: "application/octet-stream"
     },
