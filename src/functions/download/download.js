@@ -35,14 +35,16 @@ exports.handler = async function (event, context) {
   //   asset_id: asset.id
   //   // access_token: token
   // });
+  const noAuthGithub = new Octokit();
   const file = fs.createWriteStream("/tmp/copypasta-1.0.4.dmg");
-  const buffer = await github.repos.getReleaseAsset({
+  const buffer = await noAuthGithub.repos.getReleaseAsset({
     owner,
     repo,
     asset_id: asset.id,
     headers: {
       Accept: "application/octet-stream"
-    }
+    },
+    access_token: token
   });
   file.write(buffer);
   file.end();
