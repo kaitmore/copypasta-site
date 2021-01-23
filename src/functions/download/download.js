@@ -27,19 +27,15 @@ exports.handler = async function (event, context) {
   }
 
   // let download_url = asset.browser_download_url;
-  github.repos.getReleaseAsset.endpoint.merge({
-    headers: {
-      Accept: "application/octet-stream"
-    },
-    owner,
-    repo,
-    asset_id,
-    access_token: process.env.GH_TOKEN
-  });
+
   const asset = await github.repos.getReleaseAsset({
     owner,
     repo,
-    asset_id
+    asset_id,
+    headers: {
+      Accept: "application/octet-stream",
+      authorization: `token ${token}`
+    }
   });
   fs.readdir(".", (err, files) => {
     files.forEach((file) => {
