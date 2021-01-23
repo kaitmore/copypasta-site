@@ -32,7 +32,7 @@ exports.handler = async function (event, context) {
     },
     owner,
     repo,
-    asset_id: asset.id,
+    asset_id,
     access_token: process.env.GH_TOKEN
   });
   const asset = await github.repos.getReleaseAsset({
