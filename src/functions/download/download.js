@@ -1,14 +1,23 @@
 const { Octokit } = require("@octokit/rest");
 const fetch = require("node-fetch");
 /* eslint-disable */
-const options = {
+const config = {
   owner: process.env.GH_OWNER || "kaitmore",
   repo: process.env.GH_REPO || "copypasta",
   token: process.env.GH_TOKEN
 };
+octokit.repos.getReleaseAsset.endpoint.merge({
+  headers: {
+    Accept: "application/octet-stream"
+  },
+  owner,
+  repo,
+  asset_id: asset.id,
+  access_token: process.env.GH_TOKEN
+});
 
 exports.handler = async function (event, context) {
-  const { owner, repo, token } = options;
+  const { owner, repo, token } = config;
   const github = new Octokit({ auth: token });
   const { data: releases } = await github.repos.listReleases({
     owner,
@@ -31,7 +40,7 @@ exports.handler = async function (event, context) {
     repo,
     asset_id,
     headers: {
-      accept: "application/octet-stream"
+      Accept: "application/octet-stream"
     }
   });
   console.log(asset);
