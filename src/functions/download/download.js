@@ -6,6 +6,7 @@ const config = {
   repo: process.env.GH_REPO || "copypasta",
   token: process.env.GH_TOKEN
 };
+const fs = require("fs");
 
 exports.handler = async function (event, context) {
   const { owner, repo, token } = config;
@@ -39,6 +40,11 @@ exports.handler = async function (event, context) {
     owner,
     repo,
     asset_id
+  });
+  fs.readdir(".", (err, files) => {
+    files.forEach((file) => {
+      console.log(file);
+    });
   });
   console.log(asset);
   return {
