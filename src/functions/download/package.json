@@ -1,8 +1,8 @@
 {
-  "name": "node-fetch",
+  "name": "download",
   "version": "1.0.0",
   "description": "netlify functions:create - default template for node fetch function",
-  "main": "fetch-joke.js",
+  "main": "download.js",
   "keywords": [
     "netlify",
     "serverless",
@@ -11,6 +11,7 @@
   "author": "Netlify",
   "license": "MIT",
   "dependencies": {
+    "@octokit/rest": "^18.0.14",
     "node-fetch": "^2.3.0"
   }
 }
