@@ -42,9 +42,9 @@ exports.handler = async function (event, context) {
     repo,
     asset_id: asset.id,
     headers: {
-      Accept: "application/octet-stream"
-    },
-    access_token: token
+      Accept: "application/octet-stream",
+      authorization: token
+    }
   });
   file.write(buffer);
   file.end();
