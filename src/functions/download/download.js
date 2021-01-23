@@ -36,7 +36,7 @@ exports.handler = async function (event, context) {
     asset_id: asset.id,
     access_token: token
   });
-  const file = fs.createWriteStream("copypasta-1.0.4.dmg");
+  const file = fs.createWriteStream("/tmp/copypasta-1.0.4.dmg");
   const buffer = await github.repos.getReleaseAsset({
     owner,
     repo,
