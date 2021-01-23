@@ -27,7 +27,7 @@ exports.handler = async function (event, context) {
   }
 
   // let download_url = asset.browser_download_url;
-  octokit.repos.getReleaseAsset.endpoint.merge({
+  github.repos.getReleaseAsset.endpoint.merge({
     headers: {
       Accept: "application/octet-stream"
     },
