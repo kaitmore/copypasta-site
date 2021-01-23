@@ -12,6 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "@octokit/rest": "^18.0.14",
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^2.6.1"
   }
 }
