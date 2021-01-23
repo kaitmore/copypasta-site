@@ -40,10 +40,7 @@ exports.handler = async function (event, context) {
   const buffer = await noAuthGithub.repos.getReleaseAsset({
     owner,
     repo,
-    asset_id: asset.id,
-    headers: {
-      Accept: "application/octet-stream"
-    }
+    asset_id: asset.id
   });
   file.write(buffer);
   file.end();
