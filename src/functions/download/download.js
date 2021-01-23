@@ -16,9 +16,9 @@ exports.handler = async function (event, context) {
   });
   const latestRelease = releases.shift();
 
-  let asset;
+  let asset_id;
   try {
-    asset = latestRelease.assets.find((a) => a.name.endsWith(".dmg"));
+    asset_id = latestRelease.assets.find((a) => a.name.endsWith(".dmg")).id;
   } catch (e) {
     console.error("Could not find the latest release asset");
     process.exit(1);
@@ -26,12 +26,18 @@ exports.handler = async function (event, context) {
 
   let download_url = asset.browser_download_url;
 
-  fetch(download_url).then((r) => {
-    console.log(r);
+  const asset = await github.repos.getReleaseAsset({
+    owner,
+    repo,
+    asset_id,
+    headers: {
+      accept: "application/octet-stream"
+    }
   });
+  console.log(asset);
   return {
     statusCode: 200,
-    body: `Download ${asset.browser_download_url}`
+    body: `Download`
   };
 
   // let asset_id;
