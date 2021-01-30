@@ -13,7 +13,7 @@ exports.handler = async function (req, context) {
     const hash = await genHash(salt, licenseKey);
     const email = paymentIntent.receipt_email || `kaitmore@gmail.com`;
 
-    const DOMAIN = "email.copypasta.sh";
+    const DOMAIN = "orders.copypasta.sh";
     const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN });
     const data = {
       from: "Excited User <me@samples.mailgun.org>",
