@@ -1,15 +1,18 @@
 let { setLicenseKey } = require("../../utils/db.js");
 const bcrypt = require("bcrypt");
+const { v4: uuidv4 } = require("uuid");
 
 exports.handler = async function (req, context) {
   const event = JSON.parse(req.body);
 
   if (event.type === "payment_intent.succeeded") {
     const paymentIntent = event.data.object;
-    const { salt } = await genSalt();
-    const { hash } = await genHash(salt, paymentIntent.id);
+    const licenseKey = uuidv4();
+    const salt = await genSalt();
+    const hash = await genHash(salt, licenseKey);
+    const email = paymentIntent.receipt_email || `${Math.random()}@gmail.com`;
     try {
-      await setLicenseKey(`${Math.random()}@gmail.com`, hash);
+      await setLicenseKey(email, hash);
     } catch (e) {
       console.error(e);
       return {
@@ -35,9 +38,7 @@ function genSalt() {
       if (err) {
         reject(err);
       } else {
-        resolve({
-          salt
-        });
+        resolve(salt);
       }
     });
   });
@@ -49,9 +50,7 @@ function genHash(salt, password) {
       if (err) {
         reject(err);
       } else {
-        resolve({
-          hash
-        });
+        resolve(hash);
       }
     });
   });
