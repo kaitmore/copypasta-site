@@ -1,4 +1,5 @@
-const { client, q } = require("./db.js");
+let { client, q } = require("./db.js");
+client = require("util").promisify(client.query);
 
 // Match the raw body to content type application/json
 exports.handler = async function (req, context) {
@@ -12,25 +13,16 @@ exports.handler = async function (req, context) {
   } else {
     console.log(`Unhandled event type ${event.type}`);
   }
-  return client
-    .query(
-      q.Create(q.Collection("licenses"), {
-        data: { title: "What I had for breakfast .." }
-      })
-    )
-    .then((ret) => {
-      return {
-        statusCode: 200,
-        body: JSON.stringify(ret)
-      };
+  const ret = await client(
+    q.Create(q.Collection("licenses"), {
+      data: { title: "What I had for breakfast .." }
     })
-    .catch((e) => {
-      console.log(e);
-      return {
-        statusCode: 500,
-        body: JSON.stringify(e)
-      };
-    });
+  );
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(ret)
+  };
 };
 
 function createLicenseKey() {}
