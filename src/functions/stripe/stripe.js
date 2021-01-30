@@ -1,9 +1,9 @@
 // Match the raw body to content type application/json
-exports.handler = async function (event, context) {
+exports.handler = async function (req, context) {
+  const event = JSON.parse(req.body);
   console.log("event", event);
-  console.log("event.body.type", event.body.type);
   // Handle the event
-  switch (event.body.type) {
+  switch (event.type) {
     case "payment_intent.succeeded":
       const paymentIntent = event.data.object;
       console.log(paymentIntent);
