@@ -3,7 +3,7 @@ exports.handler = async function (event, context) {
   console.log("event", event);
   console.log("context", context);
   // Handle the event
-  switch (event.type) {
+  switch (event.body.type) {
     case "payment_intent.succeeded":
       const paymentIntent = event.data.object;
       console.log(paymentIntent);
