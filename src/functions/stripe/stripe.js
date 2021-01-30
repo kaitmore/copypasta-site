@@ -5,7 +5,7 @@ const app = require("express")();
 const bodyParser = require("body-parser");
 
 // Match the raw body to content type application/json
-app.post(
+exports.handler = app.post(
   "/stripe",
   bodyParser.raw({ type: "application/json" }),
   (request, response) => {
