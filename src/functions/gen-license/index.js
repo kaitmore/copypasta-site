@@ -12,9 +12,16 @@ exports.handler = async function (req, context) {
       await setLicenseKey(`${Math.random()}@gmail.com`, hash);
     } catch (e) {
       console.error(e);
+      return {
+        statusCode: 500,
+        body: JSON.stringify(e)
+      };
     }
   } else {
-    console.log(`Unhandled event type ${event.type}`);
+    return {
+      statusCode: 404,
+      body: `Unhandled event type ${event.type}`
+    };
   }
 
   return {
