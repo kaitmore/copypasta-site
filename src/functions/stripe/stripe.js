@@ -1,5 +1,4 @@
 let { client, q } = require("./db.js");
-client = require("util").promisify(client.query);
 
 // Match the raw body to content type application/json
 exports.handler = async function (req, context) {
@@ -13,7 +12,7 @@ exports.handler = async function (req, context) {
   } else {
     console.log(`Unhandled event type ${event.type}`);
   }
-  const ret = await client(
+  const ret = await client.query(
     q.Create(q.Collection("licenses"), {
       data: { title: "What I had for breakfast .." }
     })
