@@ -1,5 +1,4 @@
 let { setLicenseKey } = require("../../utils/db.js");
-const bcrypt = require("bcrypt");
 const mailgun = require("mailgun-js");
 const { v4: uuidv4 } = require("uuid");
 
@@ -45,27 +44,3 @@ exports.handler = async function (req, context) {
     statusCode: 200
   };
 };
-
-function genSalt() {
-  return new Promise((resolve, reject) => {
-    bcrypt.genSalt(10, function (err, salt) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(salt);
-      }
-    });
-  });
-}
-
-function genHash(salt, password) {
-  return new Promise((resolve, reject) => {
-    bcrypt.hash(password, salt, function (err, hash) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(hash);
-      }
-    });
-  });
-}
