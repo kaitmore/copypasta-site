@@ -1,7 +1,7 @@
 // Match the raw body to content type application/json
 exports.handler = async function (event, context) {
   console.log("event", event);
-  console.log("context", context);
+  console.log("event.body.type", event.body.type);
   // Handle the event
   switch (event.body.type) {
     case "payment_intent.succeeded":
