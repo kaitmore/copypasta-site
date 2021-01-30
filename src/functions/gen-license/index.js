@@ -1,5 +1,6 @@
 let { setLicenseKey } = require("../../utils/db.js");
 const bcrypt = require("bcrypt");
+const mailgun = require("mailgun-js");
 const { v4: uuidv4 } = require("uuid");
 
 exports.handler = async function (req, context) {
@@ -10,7 +11,20 @@ exports.handler = async function (req, context) {
     const licenseKey = uuidv4();
     const salt = await genSalt();
     const hash = await genHash(salt, licenseKey);
-    const email = paymentIntent.receipt_email || `${Math.random()}@gmail.com`;
+    const email = paymentIntent.receipt_email || `kaitmore@gmail.com`;
+
+    const DOMAIN = "copypasta.sh";
+    const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN });
+    const data = {
+      from: "Excited User <me@samples.mailgun.org>",
+      to: email,
+      subject: "Hello",
+      text: `Your License key is: ${licenseKey}`
+    };
+    mg.messages().send(data, function (error, body) {
+      console.log(body);
+    });
+
     try {
       await setLicenseKey(email, hash);
     } catch (e) {
