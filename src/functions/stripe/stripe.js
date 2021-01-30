@@ -18,7 +18,4 @@ exports.handler = async function (event, context) {
     default:
       console.log(`Unhandled event type ${event.type}`);
   }
-
-  // Return a response to acknowledge receipt of the event
-  response.json({ received: true });
 };
