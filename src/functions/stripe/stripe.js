@@ -14,7 +14,8 @@ exports.handler = async function (req, context) {
           data: { title: "What I had for breakfast .." }
         })
       )
-      .then((ret) => console.log("RETURN QUERY", ret));
+      .then((ret) => console.log("RETURN QUERY", ret))
+      .catch(console.log);
     // Then define and call a method to handle the successful payment intent.
   } else {
     console.log(`Unhandled event type ${event.type}`);
