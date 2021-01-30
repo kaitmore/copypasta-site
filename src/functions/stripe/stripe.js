@@ -12,7 +12,7 @@ exports.handler = async function (req, context) {
   } else {
     console.log(`Unhandled event type ${event.type}`);
   }
-  client
+  return client
     .query(
       q.Create(q.Collection("licenses"), {
         data: { title: "What I had for breakfast .." }
