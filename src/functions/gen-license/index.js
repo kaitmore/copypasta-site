@@ -3,6 +3,11 @@ const mailgun = require("mailgun-js");
 const { v4: uuidv4 } = require("uuid");
 const { genHash, genSalt } = require("../../utils/hash.js");
 
+const mg = mailgun({
+  apiKey: process.env.MAILGUN_API_KEY,
+  domain: process.env.MAILGUN_DOMAIN
+});
+
 exports.handler = async function (req, context) {
   const event = JSON.parse(req.body);
 
@@ -12,21 +17,7 @@ exports.handler = async function (req, context) {
     const salt = await genSalt();
     const hash = await genHash(salt, licenseKey);
     const email = paymentIntent.receipt_email || `kaitmore@gmail.com`;
-
-    const mg = mailgun({
-      apiKey: process.env.MAILGUN_API_KEY,
-      domain: process.env.MAILGUN_DOMAIN
-    });
-    const data = {
-      from: "Excited User <me@samples.mailgun.org>",
-      to: email,
-      subject: "Hello",
-      text: `Your License key is: ${licenseKey}`
-    };
-    mg.messages().send(data, function (error, body) {
-      console.log(body);
-    });
-
+    console.log("paymentIntent", paymentIntent);
     try {
       await setLicenseKey(email, hash);
     } catch (e) {
@@ -47,3 +38,24 @@ exports.handler = async function (req, context) {
     statusCode: 200
   };
 };
+
+function sendEmail(email) {
+  const data = {
+    from: "CopyPasta <kaitmore@gmail.com>",
+    to: email,
+    subject: "Your CopyPasta license key",
+    text: ```
+    Thanks for ordering CopyPasta! If you have any trouble or want a refund at any time, please don't hesitate to contact me personally at kaitmore@gmail.com.
+
+    License name: Kaitlin Moreno
+    License number: ${licenseKey}
+
+    Thanks!
+    Kait
+    ```
+  };
+  mg.messages().send(data, function (error, body) {
+    if (error) console.error(error);
+    else console.log(body);
+  });
+}
