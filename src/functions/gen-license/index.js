@@ -1,6 +1,7 @@
 let { setLicenseKey } = require("../../utils/db.js");
 const mailgun = require("mailgun-js");
 const { v4: uuidv4 } = require("uuid");
+const { genHash, genSalt } = "../../utils/hash.js";
 
 exports.handler = async function (req, context) {
   const event = JSON.parse(req.body);
@@ -12,8 +13,10 @@ exports.handler = async function (req, context) {
     const hash = await genHash(salt, licenseKey);
     const email = paymentIntent.receipt_email || `kaitmore@gmail.com`;
 
-    const DOMAIN = "orders.copypasta.sh";
-    const mg = mailgun({ apiKey: process.env.MAILGUN_API_KEY, domain: DOMAIN });
+    const mg = mailgun({
+      apiKey: process.env.MAILGUN_API_KEY,
+      domain: process.env.MAILGUN_DOMAIN
+    });
     const data = {
       from: "Excited User <me@samples.mailgun.org>",
       to: email,
