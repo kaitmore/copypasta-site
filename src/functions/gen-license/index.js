@@ -57,7 +57,7 @@ function sendEmail(email, name, licenseKey) {
     from: "Kait Moreno <kaitmore@gmail.com>",
     to: email,
     subject: "Your CopyPasta license key",
-    text: ```
+    text: `
     Thanks for ordering CopyPasta! If you have any trouble or want a refund at any time, please don't hesitate to contact me personally at kaitmore@gmail.com.
 
     License name: ${licenseName}
@@ -65,7 +65,7 @@ function sendEmail(email, name, licenseKey) {
 
     Thanks!
     Kait
-    ```
+    `
   };
   return _sendEmail(data);
 }
