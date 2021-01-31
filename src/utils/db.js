@@ -16,7 +16,7 @@ const isLicenseValid = async (licenseKey) => {
   try {
     resp = await client.query(
       q.Map(
-        q.Paginate(Documents(Collection("licenses"))),
+        q.Paginate(q.Documents(q.Collection("licenses"))),
         q.Lambda((x) => q.Get(x))
       )
     );
