@@ -11,7 +11,7 @@ const setLicenseKey = async (email, name, licenseKey) =>
     })
   );
 
-const isLicenseValid = async (licenseKey) => {
+const lookupLicenseKey = async (licenseKey) => {
   const resp = await client.query(
     q.Get(q.Match(q.Index("users_by_license"), licenseKey))
   );
