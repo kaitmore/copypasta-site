@@ -52,5 +52,5 @@ const _findMatchingLicense = async (entries, licenseKey) => {
     if (isValid) return true;
   }
 };
-isLicenseValid("dbdf673e-6bc8-4002-80a1-257d914db1a6");
+
 module.exports = { setLicenseKey, isLicenseValid };
