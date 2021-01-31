@@ -1,7 +1,7 @@
 let { setLicenseKey } = require("../../utils/db.js");
 const mailgun = require("mailgun-js");
 const { v4: uuidv4 } = require("uuid");
-const { genHash, genSalt } = "../../utils/hash.js";
+const { genHash, genSalt } = require("../../utils/hash.js");
 
 exports.handler = async function (req, context) {
   const event = JSON.parse(req.body);
