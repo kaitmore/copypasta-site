@@ -7,7 +7,7 @@ exports.handler = async function ({ queryStringParameters }, context) {
     const { licenseKey } = queryStringParameters;
 
     console.log("queryStringParameters", queryStringParameters);
-    const { generatedHash } = await reHash(salt, licenseKey);
+    const { generatedHash } = await reHash(licenseKey);
 
     console.log("generatedHash", generatedHash);
     const isLicenseValid = await lookupLicenseKey(generatedHash);
