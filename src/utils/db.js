@@ -12,6 +12,8 @@ const setLicenseKey = async (email, name, licenseKey) =>
   );
 
 const lookupLicenseKey = async (licenseKey) =>
-  await client.query(q.Get(q.Ref(q.Collection(DOCUMENT_NAME), licenseKey)));
+  await client.query(
+    q.Get(q.Ref(q.Collection(DOCUMENT_NAME), JSON.stringify(licenseKey)))
+  );
 
 module.exports = { setLicenseKey, lookupLicenseKey };
