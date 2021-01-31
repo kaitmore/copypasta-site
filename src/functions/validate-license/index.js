@@ -8,10 +8,10 @@ exports.handler = async function ({ queryStringParameters }, context) {
 
     console.log("queryStringParameters", queryStringParameters);
     const { generatedHash } = await reHash(licenseKey);
-    const isLicenseValid = await isLicenseValid(generatedHash);
+    const isValid = await isLicenseValid(generatedHash);
     return {
       status: 200,
-      body: JSON.stringify(isLicenseValid)
+      body: JSON.stringify(isValid)
     };
     // TODO: lookup hashedLicense in db, if found, license key is valid, else invalid
   } catch (e) {
