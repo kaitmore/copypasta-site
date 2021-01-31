@@ -16,12 +16,14 @@ const setLicenseKey = async (email, name, licenseKey) =>
 const isLicenseValid = async (licenseKey) => {
   let result;
   try {
-    result = _getPaginatedEntries();
-    _findMatchingLicense(result, licenseKey);
+    result = await _getPaginatedEntries();
+    const isValid = await _findMatchingLicense(result.data, licenseKey);
+    if (isValid) return true;
     if (result.after) {
       while (result.after) {
-        result = _getPaginatedEntries(result.after);
-        _findMatchingLicense(result, licenseKey);
+        result = await _getPaginatedEntries(result.after);
+        const isValid = await _findMatchingLicense(result.data, licenseKey);
+        if (isValid) return true;
       }
     }
   } catch (e) {
@@ -50,4 +52,5 @@ const _findMatchingLicense = async (entries, licenseKey) => {
     if (isValid) return true;
   }
 };
+isLicenseValid("dbdf673e-6bc8-4002-80a1-257d914db1a6");
 module.exports = { setLicenseKey, isLicenseValid };

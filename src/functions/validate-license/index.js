@@ -1,4 +1,3 @@
-const { reHash } = require("../../utils/hash.js");
 const { isLicenseValid } = require("../../utils/db");
 
 // handles a license key from a user and returns whether or not it is valid
