@@ -29,7 +29,7 @@ exports.handler = async function (req, context) {
       };
     }
     try {
-      await setLicenseKey(email, hash);
+      await setLicenseKey(email, name, hash);
     } catch (e) {
       console.error(e);
       return {
@@ -52,7 +52,6 @@ exports.handler = async function (req, context) {
 };
 
 function sendEmail(email, name, licenseKey) {
-  const licenseName = name || email;
   const data = {
     from: "Kait Moreno <kaitmore@gmail.com>",
     to: email,
@@ -60,7 +59,8 @@ function sendEmail(email, name, licenseKey) {
     text: `
 Thanks for ordering CopyPasta! If you have any trouble or want a refund at any time, please don't hesitate to contact me personally at kaitmore@gmail.com.
 
-License name: ${licenseName}
+License name: ${name}
+License email: ${email}
 License number: ${licenseKey}
 
 Thanks!
