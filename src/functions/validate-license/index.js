@@ -1,12 +1,13 @@
-const { genHash, genSalt } = require("../../utils/hash.js");
+const { reHash } = require("../../utils/hash.js");
 const { lookupLicenseKey } = require("../../utils/db");
 
 // handles a license key from a user and returns whether or not it is valid
 exports.handler = async function ({ queryStringParameters }, context) {
   try {
     const { licenseKey } = queryStringParameters;
-    const salt = await genSalt();
-    const hashedLicenseKey = await genHash(salt, licenseKey);
+
+    const { hashedLicenseKey } = await reHash(salt, licenseKey);
+
     console.log("queryStringParameters", queryStringParameters);
     const isLicenseValid = await lookupLicenseKey(hashedLicenseKey);
     console.log("isLicenseValid", isLicenseValid);
