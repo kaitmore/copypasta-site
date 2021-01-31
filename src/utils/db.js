@@ -7,7 +7,7 @@ const client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET });
 const setLicenseKey = async (email, name, licenseKey) =>
   await client.query(
     q.Create(q.Collection(DOCUMENT_NAME), {
-      data: { [email]: { name, licenseKey } }
+      data: { name, licenseKey, email }
     })
   );
 
