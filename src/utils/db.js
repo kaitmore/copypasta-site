@@ -12,9 +12,14 @@ const setLicenseKey = async (email, name, licenseKey) =>
   );
 
 const isLicenseValid = async (licenseKey) => {
-  const resp = await client.query(
-    q.Get(q.Match(q.Index("users_by_license"), licenseKey))
-  );
+  let resp;
+  try {
+    resp = await client.query(
+      q.Get(q.Match(q.Index("users_by_license"), licenseKey))
+    );
+  } catch (e) {
+    console.log("ERROR IN isLicenseValid", e);
+  }
   console.log("RESP", resp);
   return true;
 };
