@@ -27,8 +27,9 @@ function genHash(salt, password) {
 function reHash(incomingHash) {
   // extract salt from existing has (30 characters)
   let salt = incomingHash.substr(0, 30);
+  console.log("incomingHash", incomingHash);
   return new Promise((resolve, reject) => {
-    bcrypt.hash(password, salt, function (err, generatedHash) {
+    bcrypt.hash(incomingHash, salt, function (err, generatedHash) {
       if (err) {
         reject({
           err,
