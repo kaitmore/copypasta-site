@@ -14,7 +14,7 @@ const setLicenseKey = async (email, name, licenseKey) =>
 const isLicenseValid = async (licenseKey) => {
   let resp;
   try {
-    resp = await client.query(q.Get(q.Ref(q.Collection("licenses"))));
+    resp = await client.query(q.Get(q.Match(q.Index("all_licenses"))));
   } catch (e) {
     console.log("ERROR IN isLicenseValid", e);
   }
