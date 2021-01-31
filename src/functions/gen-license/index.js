@@ -58,14 +58,14 @@ function sendEmail(email, name, licenseKey) {
     to: email,
     subject: "Your CopyPasta license key",
     text: `
-    Thanks for ordering CopyPasta! If you have any trouble or want a refund at any time, please don't hesitate to contact me personally at kaitmore@gmail.com.
+Thanks for ordering CopyPasta! If you have any trouble or want a refund at any time, please don't hesitate to contact me personally at kaitmore@gmail.com.
 
-    License name: ${licenseName}
-    License number: ${licenseKey}
+License name: ${licenseName}
+License number: ${licenseKey}
 
-    Thanks!
-    Kait
-    `
+Thanks!
+Kait
+`
   };
   return _sendEmail(data);
 }
