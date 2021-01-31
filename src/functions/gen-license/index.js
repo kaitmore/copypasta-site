@@ -73,7 +73,7 @@ function sendEmail(email, name, licenseKey) {
 function _sendEmail(data) {
   return new Promise((resolve, reject) => {
     mg.messages().send(data, function (error, body) {
-      if (err) {
+      if (error) {
         reject(error);
       } else {
         resolve(body);
