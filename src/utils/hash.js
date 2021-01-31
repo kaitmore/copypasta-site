@@ -24,27 +24,16 @@ function genHash(salt, password) {
   });
 }
 
-function reHash(incomingHash) {
-  // extract salt from existing has (30 characters)
-  let salt = incomingHash.substr(0, 30);
-
-  return new Promise((resolve, reject) => {
-    bcrypt.hash(incomingHash, salt, function (err, generatedHash) {
-      console.log(err);
-      console.log("salt", salt);
-      console.log("generatedHash in reHash", generatedHash);
+function compare(hashedLicenseKey, licenseKey) {
+  return new Promise((resolve, reject) =>
+    bcrypt.compare(licenseKey, hashedLicenseKey, function (err, result) {
       if (err) {
-        reject({
-          err,
-          incomingHash, // stored hash
-          generatedHash // generated hash
-        });
+        reject(err);
       } else {
-        resolve({
-          generatedHash // generated hash
-        });
+        resolve(result);
       }
-    });
-  });
+    })
+  );
 }
-module.exports = { genHash, genSalt, reHash };
+
+module.exports = { genHash, genSalt, compare };

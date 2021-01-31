@@ -6,10 +6,7 @@ exports.handler = async function ({ queryStringParameters }, context) {
   try {
     const { licenseKey } = queryStringParameters;
 
-    console.log("queryStringParameters", queryStringParameters);
-    const { generatedHash } = await reHash(licenseKey);
-    console.log("generatedHash", generatedHash);
-    const isValid = await isLicenseValid(generatedHash);
+    const isValid = await isLicenseValid(licenseKey);
     return {
       status: 200,
       body: JSON.stringify(isValid)
