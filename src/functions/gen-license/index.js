@@ -20,7 +20,7 @@ exports.handler = async function (req, context) {
     const name = paymentIntent.shipping.name;
 
     try {
-      await sendEmail(email, name);
+      await sendEmail(email, name, licenseKey);
     } catch (e) {
       console.error(e);
       return {
@@ -51,10 +51,10 @@ exports.handler = async function (req, context) {
   };
 };
 
-function sendEmail(email, name) {
+function sendEmail(email, name, licenseKey) {
   const licenseName = name || email;
   const data = {
-    from: "CopyPasta <kaitmore@gmail.com>",
+    from: "Kait Moreno <kaitmore@gmail.com>",
     to: email,
     subject: "Your CopyPasta license key",
     text: ```
