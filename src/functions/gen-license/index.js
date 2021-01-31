@@ -74,9 +74,9 @@ function _sendEmail(data) {
   return new Promise((resolve, reject) => {
     mg.messages().send(data, function (error, body) {
       if (err) {
-        reject(err);
+        reject(error);
       } else {
-        resolve(hash);
+        resolve(body);
       }
     });
   });
