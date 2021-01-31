@@ -17,14 +17,26 @@ exports.handler = async function (req, context) {
     const salt = await genSalt();
     const hash = await genHash(salt, licenseKey);
     const email = paymentIntent.receipt_email || `kaitmore@gmail.com`;
-    console.log("paymentIntent", paymentIntent);
+    const name = paymentIntent.shipping.name;
+
+    try {
+      await sendEmail(email, name);
+    } catch (e) {
+      console.error(e);
+      return {
+        statusCode: 500,
+        body: `Error sending email: ${JSON.stringify(e)}`
+      };
+    }
     try {
       await setLicenseKey(email, hash);
     } catch (e) {
       console.error(e);
       return {
         statusCode: 500,
-        body: JSON.stringify(e)
+        body: `Error persisting license key to the database ${JSON.stringify(
+          e
+        )}`
       };
     }
   } else {
@@ -39,7 +51,8 @@ exports.handler = async function (req, context) {
   };
 };
 
-function sendEmail(email) {
+function sendEmail(email, name) {
+  const licenseName = name || email;
   const data = {
     from: "CopyPasta <kaitmore@gmail.com>",
     to: email,
@@ -47,15 +60,24 @@ function sendEmail(email) {
     text: ```
     Thanks for ordering CopyPasta! If you have any trouble or want a refund at any time, please don't hesitate to contact me personally at kaitmore@gmail.com.
 
-    License name: Kaitlin Moreno
+    License name: ${licenseName}
     License number: ${licenseKey}
 
     Thanks!
     Kait
     ```
   };
-  mg.messages().send(data, function (error, body) {
-    if (error) console.error(error);
-    else console.log(body);
+  return _sendEmail(data);
+}
+
+function _sendEmail(data) {
+  return new Promise((resolve, reject) => {
+    mg.messages().send(data, function (error, body) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(hash);
+      }
+    });
   });
 }
