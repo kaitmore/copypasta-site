@@ -8,7 +8,7 @@ exports.handler = async function ({ queryStringParameters }, context) {
     const salt = await genSalt();
     const hashedLicenseKey = await genHash(salt, licenseKey);
     const isLicenseValid = await lookupLicenseKey(hashedLicenseKey);
-
+    console.log("queryStringParameters", queryStringParameters);
     console.log("isLicenseValid", isLicenseValid);
     return {
       status: 200,
