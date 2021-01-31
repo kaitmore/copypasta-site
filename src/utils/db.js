@@ -10,4 +10,8 @@ const setLicenseKey = async (email, name, licenseKey) =>
       data: { [email]: { name, licenseKey } }
     })
   );
-module.exports = { setLicenseKey };
+
+const lookupLicenseKey = async (licenseKey) =>
+  await client.query(q.Get(q.Ref(q.Collection(DOCUMENT_NAME), licenseKey)));
+
+module.exports = { setLicenseKey, lookupLicenseKey };
