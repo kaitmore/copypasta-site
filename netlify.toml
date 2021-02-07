@@ -12,3 +12,8 @@
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+[[redirects]]
+  from = "/cancel"
+  to = "/"
+  status = 200

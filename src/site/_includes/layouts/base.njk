@@ -18,7 +18,7 @@
 
     <script src="https://js.stripe.com/v3"></script>
     {% set js %}
-      {% include "js/core.js" %}
+      {% include "js/checkout.js" %}
     {% endset %}
     <script>{{ js | jsmin | safe }}</script>
      <!-- Load Stripe.js on your website. -->

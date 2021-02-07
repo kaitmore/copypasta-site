@@ -206,3 +206,19 @@ footer {
     border-bottom: solid 1px $text-color;
   }
 }
+
+#checkout-button {
+  background-color: #6772e5;
+  color: #fff;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 4px;
+  font-size: 1em;
+  font-family: inherit;
+  cursor: pointer;
+  margin-left: 50px;
+}
+
+#checkout-button:hover {
+  background-color: #707cff;
+}
