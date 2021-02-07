@@ -10,7 +10,7 @@ exports.handler = async function (req, context) {
   try {
     session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      line_items: [{ price: "price_1IIDzYEZYj5kKn7UluwG4CiT", quantity: 1 }],
+      line_items: [{ price: "price_1IFLXvEZYj5kKn7UmP44B14B", quantity: 1 }],
       mode: "payment",
       success_url: "https://copypasta.sh/success",
       cancel_url: "https://copypasta.sh",
