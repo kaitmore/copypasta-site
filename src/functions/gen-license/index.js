@@ -10,7 +10,7 @@ const mg = mailgun({
 
 exports.handler = async function (req, context) {
   const event = JSON.parse(req.body);
-
+  console.log("EVENT", event);
   if (event.type === "payment_intent.succeeded") {
     const paymentIntent = event.data.object;
     const licenseKey = uuidv4();
