@@ -12,7 +12,8 @@ exports.handler = async function (req, context) {
       line_items: [{ price: "price_1IIDzYEZYj5kKn7UluwG4CiT", quantity: 1 }],
       mode: "payment",
       success_url: "https://copypasta.sh/success",
-      cancel_url: "https://copypasta.sh"
+      cancel_url: "https://copypasta.sh",
+      allow_promotion_codes: true
     });
   } catch (e) {
     return {
