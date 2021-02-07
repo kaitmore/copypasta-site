@@ -10,17 +10,15 @@ const mg = mailgun({
 
 exports.handler = async function (req, context) {
   const event = JSON.parse(req.body);
-  console.log("EVENT", event);
   if (event.type === "payment_intent.succeeded") {
     const paymentIntent = event.data.object;
     const licenseKey = uuidv4();
     const salt = await genSalt();
     const hash = await genHash(salt, licenseKey);
-    const email = paymentIntent.receipt_email || `kaitmore@gmail.com`;
-    const name = paymentIntent.shipping.name;
+    const email = paymentIntent.receipt_email;
 
     try {
-      await sendEmail(email, name, licenseKey);
+      await sendEmail(email, licenseKey);
     } catch (e) {
       console.error(e);
       return {
@@ -29,7 +27,7 @@ exports.handler = async function (req, context) {
       };
     }
     try {
-      await setLicenseKey(email, name, hash);
+      await setLicenseKey(email, hash);
     } catch (e) {
       console.error(e);
       return {
@@ -51,7 +49,7 @@ exports.handler = async function (req, context) {
   };
 };
 
-function sendEmail(email, name, licenseKey) {
+function sendEmail(email, licenseKey) {
   const data = {
     from: "Kait Moreno <kaitmore@gmail.com>",
     to: email,
@@ -59,7 +57,8 @@ function sendEmail(email, name, licenseKey) {
     text: `
 Thanks for ordering CopyPasta! If you have any trouble or want a refund at any time, please don't hesitate to contact me personally at kaitmore@gmail.com.
 
-License name: ${name}
+Download here: https://github.com/kaitmore/copypasta-releases/releases/download/v1.0.0/copypasta-1.0.0.dmg
+
 License email: ${email}
 License number: ${licenseKey}
 
