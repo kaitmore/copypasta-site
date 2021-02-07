@@ -5,6 +5,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // handles a license key from a user and returns whether or not it is valid
 exports.handler = async function (req, context) {
+  console.log("REQ", req);
   let session;
   try {
     session = await stripe.checkout.sessions.create({
