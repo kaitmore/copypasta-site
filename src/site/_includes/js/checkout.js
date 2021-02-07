@@ -1,5 +1,5 @@
 var stripe = Stripe(
-  "pk_test_51IFLVtEZYj5kKn7ULGUCIwKBbKteduiUISH6BdAElXIJRkl1zrbiIVapUM7uhX5TWzgYFWPHq1vl7JznL1dodEL0008QISV5RB"
+  "pk_live_51IFLVtEZYj5kKn7UwCTDiL2O9YyI1QrrxT9XUrZhBUbPBradRMFQKhckjA3CgrkyieRreU8MxB5sDVfc8tfqPUMR00txcBkYex"
 );
 var checkoutButton = document.getElementById("checkout-button");
 
