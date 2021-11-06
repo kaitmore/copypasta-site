@@ -9,21 +9,34 @@
   <body {% if bodyClass %}class="{{ bodyClass }}"{% endif %}>
 
     <div class="container">
-      {% include "header.njk" %}
+      <img id="logo" src="./images/logo.png"/>
+      <h1>
+        {{ title }}
+      </h1>
       <div class="content">
+        <h4>{{ subtitle }}</h4>
+
         {{ content | safe }}
+        <a target="_blank" href="https://github.com/kaitmore/copypasta-releases/releases/latest">
+          <button>Download for Free!</button>
+        </a>
       </div>
-      <img src="./images/screenshot.png" />
+      <div id="vid-container">
+        <video id="demo" autoplay loop>
+          <source src="./images/demo.mp4" type="video/mp4" >
+  Sorry, your browser does not support HTML5 video.
+</video>
+      </div>
+      {# <img src="./images/demo.gif" id ="demo"/> #}
       {% include "footer.njk" %}
     </div>
-   
+
     <script src="https://js.stripe.com/v3"></script>
     {% set js %}
-      {% include "js/checkout.js" %}
+    {% include "js/checkout.js" %}
     {% endset %}
-    <script>{{ js | jsmin | safe }}</script>
+    <script>
+      {{ js | jsmin | safe }}
+    </script>
   </body>
 </html>
-
-
-

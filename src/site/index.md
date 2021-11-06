@@ -1,12 +1,11 @@
 ---
 title: CopyPasta
-subtitle: A code snippet indexer for developers.
+subtitle: A macOS smart code snippet indexer for developers.
 layout: layouts/home.njk
 ---
-## Features
-
 - Save text snippets from anywhere on your machine
-- Indexes snippets based on origin, language
-- Auto detects programming language 
+- Indexes snippets based on origin, url, or programming language
+- Automatically detects programming language
 - Tag snippets with any arbitrary metadata
+- Works on <b>macOS 10.14</b> or higher
 

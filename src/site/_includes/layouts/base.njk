@@ -9,21 +9,22 @@
   <body {% if bodyClass %}class="{{ bodyClass }}"{% endif %}>
 
     <div class="container">
-      {% include "header.njk" %}
+      <h1>{{ title }}</h1>
       <div class="content">
         {{ content | safe }}
       </div>
+      <button>Download for Free!</button>
+      <img src="./images/screenshot.png"/>
       {% include "footer.njk" %}
     </div>
 
     <script src="https://js.stripe.com/v3"></script>
     {% set js %}
-      {% include "js/checkout.js" %}
+    {% include "js/checkout.js" %}
     {% endset %}
-    <script>{{ js | jsmin | safe }}</script>
-     <!-- Load Stripe.js on your website. -->
+    <script>
+      {{ js | jsmin | safe }}
+    </script>
+    <!-- Load Stripe.js on your website. -->
   </body>
 </html>
-
-
-

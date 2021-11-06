@@ -55,6 +55,7 @@ h1 {
   margin-top: 0.4em;
   margin-bottom: 0.2em;
   line-height: 1;
+  margin-left: 14px;
 
   @media (min-width: $mid) {
     font-size: 5em;
@@ -84,9 +85,6 @@ a:link,
 a:visited {
   color: $text-color;
   text-decoration: none;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: mix($text-color, $accent-color, 20%);
 }
 a:hover,
 a:focus {
@@ -185,6 +183,14 @@ header,
   }
 }
 
+.content {
+  padding-left: 200px;
+}
+
+h4 {
+  margin-bottom: 24px;
+}
+
 footer {
   margin-top: 6em;
   padding-top: 4em;
@@ -207,8 +213,8 @@ footer {
   }
 }
 
-#checkout-button {
-  background-color: #6772e5;
+button {
+  background-color: #1e6df6;
   color: #fff;
   padding: 8px 12px;
   border: 0;
@@ -216,9 +222,29 @@ footer {
   font-size: 1em;
   font-family: inherit;
   cursor: pointer;
-  margin-left: 50px;
+  margin: 25px 0;
 }
 
-#checkout-button:hover {
-  background-color: #707cff;
+button:hover {
+  background-color: #0c5deb;
+}
+
+span {
+  font-size: 14px;
+}
+
+#logo {
+  margin-top: 32px;
+}
+
+#vid-container {
+  overflow: hidden;
+  width: 67vw;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+#demo {
+  width: 75vw;
+  margin-left: -3.76vw;
+  border-radius: 5px;
 }
